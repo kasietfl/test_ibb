@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test_ibb/theme.dart';
-import 'package:test_ibb/ui/screens/auth_screen.dart';
+import 'package:test_ibb/view/screens/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,9 +8,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Test IBB',
+      title: 'Test Trip Finder',
       theme: AppTheme.lightTheme,
-      home: const AuthScreen(),
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
     );
   }
 }

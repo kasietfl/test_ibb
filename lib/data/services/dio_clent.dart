@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:test_ibb/data/model/trip_model.dart';
 
 class DioClient {
   final Dio _dio = Dio();
 
-  Future<dynamic> getData(
+  Future<TripsResponse> getTripsInfo(
       String departureCity, String destinationCity, String date) async {
     try {
       String url = "https://bibiptrip.com/api/avibus/search_trips_cities/";
@@ -14,7 +15,7 @@ class DioClient {
       };
 
       final response = await _dio.get(url, queryParameters: params);
-      return response.data;
+      return TripsResponse.fromJson(response.data);
     } catch (error) {
       throw Exception('Error getting data from API: ${error.toString()}');
     }
