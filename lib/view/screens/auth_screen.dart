@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:test_ibb/bloc/trip_bloc/trip_bloc.dart';
+import 'package:test_ibb/constants/colors.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 import 'package:test_ibb/view/screens/home_screen.dart';
 import 'package:test_ibb/view/widgets/custom_button.dart';
 import 'package:test_ibb/view/widgets/custom_text_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -17,10 +17,7 @@ class AuthScreen extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 165, 194, 249),
-              Color.fromARGB(255, 95, 147, 189),
-            ],
+            colors: [AppColors.lightBlue, AppColors.blue],
           ),
         ),
         padding: const EdgeInsets.all(16),
@@ -36,19 +33,14 @@ class AuthScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Image.asset("assets/images/bus.png"),
-            const SizedBox(height: 80),
+            const SizedBox(height: 90),
             CustomButton(
                 title: "Get Started", onPress: () => navigateToHome(context)),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomTextButton(
-                    onPress: _launchUrl, title: "Terms and Conditions"),
-                CustomTextButton(onPress: _launchUrl, title: "Privacy Policy")
-              ],
-            ),
-            const SizedBox(height: 8),
+            CustomTextButton(
+                onPress: () => _launchUrl("https://pub.dev/"),
+                title: "Terms and Conditions, Privacy Policy"),
+            const SizedBox(height: 8)
           ],
         ),
       ),
@@ -57,17 +49,12 @@ class AuthScreen extends StatelessWidget {
 
   void navigateToHome(BuildContext context) {
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => TripBloc(),
-                  child: const HomeScreen(),
-                )));
+        context, MaterialPageRoute(builder: (context) => const HomeScreen()));
   }
 
-  Future<void> _launchUrl() async {
-    if (!await launchUrl(Uri.parse("https://pub.dev/"))) {
-      throw Exception('Could not launch ');
+  Future _launchUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
     }
   }
 }

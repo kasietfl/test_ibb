@@ -3,11 +3,11 @@ import 'package:test_ibb/data/model/trip_model.dart';
 
 class DioClient {
   final Dio _dio = Dio();
+  String url = "https://bibiptrip.com/api/avibus/search_trips_cities/";
 
   Future<TripsResponse> getTripsInfo(
       String departureCity, String destinationCity, String date) async {
     try {
-      String url = "https://bibiptrip.com/api/avibus/search_trips_cities/";
       Map<String, dynamic> params = {
         "departure_city": departureCity,
         "destination_city": destinationCity,

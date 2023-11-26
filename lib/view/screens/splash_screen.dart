@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import 'package:test_ibb/view/screens/auth_screen.dart';
+import 'package:test_ibb/constants/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -15,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 1), () {
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (_) => const AuthScreen()));
     });
@@ -37,10 +39,7 @@ class _SplashScreenState extends State<SplashScreen>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 165, 194, 249),
-              Color.fromARGB(255, 95, 147, 189),
-            ],
+            colors: [AppColors.lightBlue, AppColors.blue],
           ),
         ),
         child: Center(
